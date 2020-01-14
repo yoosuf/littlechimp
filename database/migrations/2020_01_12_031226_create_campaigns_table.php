@@ -16,6 +16,10 @@ class CreateCampaignsTable extends Migration
 
         Schema::create('newsletters', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('account_id');
+            $table->foreign('account_id')
+                    ->references('id')->on('accounts')
+                    ->onDelete('cascade');
             $table->string('name');
             $table->string('from');
             $table->string('subject');

@@ -15,6 +15,10 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('account_id');
+            $table->foreign('account_id')
+                    ->references('id')->on('accounts')
+                    ->onDelete('cascade');
             $table->longText('file');
             $table->longText('thumb');
             $table->integer('width');

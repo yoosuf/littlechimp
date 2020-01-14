@@ -15,6 +15,11 @@ class CreateSubscribersTable extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('account_id');
+            $table->foreign('account_id')
+                    ->references('id')->on('accounts')
+                    ->onDelete('cascade');
+                    
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();

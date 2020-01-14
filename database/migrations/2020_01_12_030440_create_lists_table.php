@@ -15,6 +15,10 @@ class CreateListsTable extends Migration
     {
         Schema::create('catalogs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('account_id');
+            $table->foreign('account_id')
+                    ->references('id')->on('accounts')
+                    ->onDelete('cascade');
             $table->string('name');
             $table->enum('category', ['public', 'private', 'temporary']);
             $table->timestamps();
